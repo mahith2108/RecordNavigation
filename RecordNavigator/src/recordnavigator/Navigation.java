@@ -32,7 +32,6 @@ public class Navigation extends javax.swing.JFrame {
      * Creates new form Navigation
      */
     static int displayNumOfRecords = 0;
-    int previousDisplayedRecords = 0;
     String firstLine = "";
     int numOfRows, lastIndex = 0;
     Object[] tableRows;
@@ -150,13 +149,13 @@ public class Navigation extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         Clear = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        Next = new javax.swing.JButton();
+        Previous = new javax.swing.JButton();
+        First = new javax.swing.JButton();
+        Last = new javax.swing.JButton();
         count = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        Cleanup = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,31 +186,31 @@ public class Navigation extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Next");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Next.setText("Next");
+        Next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                NextActionPerformed(evt);
             }
         });
 
-        jButton2.setText("previous");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Previous.setText("previous");
+        Previous.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                PreviousActionPerformed(evt);
             }
         });
 
-        jButton3.setText("First");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        First.setText("First");
+        First.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                FirstActionPerformed(evt);
             }
         });
 
-        jButton4.setText("last");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        Last.setText("last");
+        Last.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                LastActionPerformed(evt);
             }
         });
 
@@ -223,10 +222,10 @@ public class Navigation extends javax.swing.JFrame {
 
         jLabel2.setText("HitCount");
 
-        jButton5.setText("CleanUp");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        Cleanup.setText("CleanUp");
+        Cleanup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                CleanupActionPerformed(evt);
             }
         });
         setJMenuBar(jMenuBar1);
@@ -244,9 +243,9 @@ public class Navigation extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Display, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(First)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(Last)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -254,13 +253,13 @@ public class Navigation extends javax.swing.JFrame {
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(Previous)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton1)
+                        .addComponent(Next)
                         .addGap(18, 18, 18)
                         .addComponent(Clear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5)
+                        .addComponent(Cleanup)
                         .addGap(12, 12, 12)))
                 .addContainerGap())
         );
@@ -271,18 +270,18 @@ public class Navigation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Display, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
+                    .addComponent(Last)
+                    .addComponent(First)
                     .addComponent(count, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Next)
                     .addComponent(Clear)
-                    .addComponent(jButton2)
-                    .addComponent(jButton5))
+                    .addComponent(Previous)
+                    .addComponent(Cleanup))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -325,7 +324,7 @@ public class Navigation extends javax.swing.JFrame {
                 // Enable sorting on table rows based on column identifier
                 sorter = new TableRowSorter<TableModel>(table);
                 table1.setRowSorter(sorter);
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(Navigation.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -341,7 +340,7 @@ public class Navigation extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ClearActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
 
         try {
             // Checking if the table results are displaying last 5/10 etc rows
@@ -367,9 +366,9 @@ public class Navigation extends javax.swing.JFrame {
         }
         lastIndex = lastIndex + numOfRows;
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_NextActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void PreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousActionPerformed
 
         // Checking if the table results are already displaying first 5/10/15 etc pages 
         if (lastIndex <= displayNumOfRecords) {
@@ -392,9 +391,9 @@ public class Navigation extends javax.swing.JFrame {
 
         lastIndex = lastIndex - numOfRows;
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_PreviousActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void FirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstActionPerformed
 
         if (lastIndex != displayNumOfRecords) {
 
@@ -415,9 +414,9 @@ public class Navigation extends javax.swing.JFrame {
             numOfRows = table.getRowCount();
             lastIndex = numOfRows;
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_FirstActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void LastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LastActionPerformed
         // TODO add your handling code here:
         if (lastIndex != lastRow) {
 
@@ -439,14 +438,14 @@ public class Navigation extends javax.swing.JFrame {
             lastIndex = lastRow;
 
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_LastActionPerformed
 
     private void countActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countActionPerformed
         // TODO add your handling code here:
 
     }//GEN-LAST:event_countActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void CleanupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanupActionPerformed
         try {
             // TODO add your handling code here:
             if (table.getRowCount() != 0) {
@@ -457,15 +456,20 @@ public class Navigation extends javax.swing.JFrame {
             pstmt.executeUpdate();
             count.setText("");
             lastIndex = 0;
-            pstmt.close();
-            conn.close();
-            rs.close();
-            hikari.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(Navigation.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                pstmt.close();
+                conn.close();
+                rs.close();
+                hikari.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Navigation.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_CleanupActionPerformed
 
     /**
      * @param args the command line arguments
@@ -505,14 +509,14 @@ public class Navigation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cleanup;
     private javax.swing.JButton Clear;
     private javax.swing.JComboBox Display;
+    private javax.swing.JButton First;
+    private javax.swing.JButton Last;
+    private javax.swing.JButton Next;
+    private javax.swing.JButton Previous;
     private javax.swing.JTextField count;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
