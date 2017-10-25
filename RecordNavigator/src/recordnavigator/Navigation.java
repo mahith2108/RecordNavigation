@@ -38,7 +38,6 @@ public class Navigation extends javax.swing.JFrame {
     RowSorter<TableModel> sorter;
     JTable table1;
     TableModel model;
-    Object tableRow;
     static Connection conn = null;
     static PreparedStatement pstmt = null;
     static int columnCount;
